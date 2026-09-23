@@ -29,6 +29,29 @@ void problema1(){
     std::cout << "Faltante: " << cantidad << std::endl;
 }
 
+void problema2() {
+    const int TAM = 200;
+    char arreglo[TAM];
+    int contador[26] = {0};
+    srand(time(0));
+
+    for (int i = 0; i < TAM; i++) {
+        arreglo[i] = 'A' + (rand() % 26);
+        contador[arreglo[i] - 'A']++;
+    }
+
+    std::cout << "Arreglo generado:" << std::endl;
+    for (int i = 0; i < TAM; i++) {
+        std::cout << arreglo[i];
+    }
+    std::cout << std::endl << std::endl;
+
+    std::cout << "Repeticiones por letra:" << std::endl;
+    for (int i = 0; i < 26; i++) {
+        std::cout << (char)('A' + i) << ": " << contador[i] << std::endl;
+    }
+}
+
 void problema3(){
     std::cin.ignore();
     char cadena1[100]; char cadena2[100];
@@ -45,6 +68,20 @@ void problema3(){
     }
 }
 
+void problema4(){
+    const int MAX = 100;
+    char cadena[MAX];
+    while(true){
+        std::cout << "Ingrese una cadena de caracteres numericos: ";
+        std::cin >> cadena;
+        int resultado = cadenaAEntero(cadena);
+        if(resultado != 0) {
+            std::cout << "El numero entero es: " << resultado << std::endl;
+            break;
+        }
+    }
+}
+
 void problema5(){
     std::cout << "Ingrese un numero entero: ";
     int numero = validarEntero();
@@ -54,6 +91,27 @@ void problema5(){
 
     convertirACadena(numero, cadena);
     std::cout << "La cadena es: " << cadena << std::endl;
+}
+
+void problema6(){
+    const int MAX = 200;
+    char original[MAX];
+    char mayusculas[MAX];
+
+    std::cout << "Ingrese una cadena de caracteres: ";
+    std::cin.getline(original, MAX);
+
+    int i = 0;
+    while (original[i] != '\0') {
+        mayusculas[i] = original[i];
+        i++;
+    }
+    mayusculas[i] = '\0';
+
+    aMayusculas(mayusculas);
+
+    std::cout << "Original: " << original << std::endl;
+    std::cout << "En mayuscula: " << mayusculas << std::endl;
 }
 
 void problema7(){
@@ -66,6 +124,21 @@ void problema7(){
     eliminarRepetidos(entrada, salida);
 
     std::cout << "Original: " << entrada << ". Sin repetidos: " << salida << std::endl;
+}
+
+void problema8(){
+    const int MAX = 200;
+    char original[MAX];
+    char texto[MAX];
+    char numeros[MAX];
+
+    std::cout << "Ingrese una cadena de caracteres: ";
+    std::cin.getline(original, MAX);
+
+    separarNumeros(original, texto, numeros);
+
+    std::cout << "Original: " << original << "." << std::endl;
+    std::cout << "Texto: " << texto << ". Numero: " << numeros << std::endl;
 }
 
 void problema9(){
@@ -89,6 +162,18 @@ void problema9(){
 
     std::cout << "Original: " << cadenaOriginal << "." << std::endl;
     std::cout << "Suma: " << resultado << "." << std::endl;
+}
+
+void problema10(){
+    const int MAX = 100;
+    char romano[MAX];
+
+    std::cout << "Ingrese un numero romano: ";
+    std::cin >> romano;
+
+    int resultado = romanoAArabigo(romano);
+
+    std::cout << "El numero arabigo es: " << resultado << std::endl;
 }
 
 void problema11(){

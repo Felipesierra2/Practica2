@@ -1,6 +1,18 @@
 #include "validaciones.h"
 #include <iostream>
 
+int valorRomano(char c) {
+    switch (c) {
+    case 'M': return 1000;
+    case 'D': return 500;
+    case 'C': return 100;
+    case 'L': return 50;
+    case 'X': return 10;
+    case 'V': return 5;
+    case 'I': return 1;
+    default:  return 0;
+    }
+}
 
 bool esNumero(char entrada[]) {
     int i = 0;
@@ -21,7 +33,7 @@ int validarEntero(){
 
     while (true) {
         std::cin >> entrada;
-
+        std::cin.ignore();
         if (esNumero(entrada)) {
             int numero = 0;
 
@@ -82,6 +94,42 @@ void convertirACadena(int numero, char cadena[]){
     cadena[i] = '\0';
 }
 
+int cadenaAEntero(const char* cadena) {
+    int numero = 0;
+    int i = 0;
+    int signo = 1;
+
+    if (cadena[0] == '-') {
+        signo = -1;
+        i = 1;
+    } else if (cadena[0] == '+') {
+        i = 1;
+    }
+
+    while (cadena[i] != '\0') {
+        if (cadena[i] < '0' || cadena[i] > '9') {
+            std::cout << "Error: caracter no numérico encontrado." << std::endl;
+            return 0;
+        }
+
+        numero = numero * 10 + (cadena[i] - '0');
+        i++;
+    }
+
+    return numero * signo;
+}
+
+void aMayusculas(char* cadena) {
+    int i = 0;
+
+    while (cadena[i] != '\0') {
+        if (cadena[i] >= 'a' && cadena[i] <= 'z') {
+            cadena[i] = cadena[i] - 32;
+        }
+        i++;
+    }
+}
+
 void eliminarRepetidos(const char* entrada, char* salida) {
     bool visto[256] = {false};
 
@@ -96,6 +144,26 @@ void eliminarRepetidos(const char* entrada, char* salida) {
     }
 
     salida[j] = '\0';
+}
+
+void separarNumeros(const char* original, char* texto, char* numeros) {
+    int i = 0;
+    int t = 0;
+    int n = 0;
+
+    while (original[i] != '\0') {
+        if (original[i] >= '0' && original[i] <= '9') {
+            numeros[n] = original[i];
+            n++;
+        } else {
+            texto[t] = original[i];
+            t++;
+        }
+        i++;
+    }
+
+    texto[t] = '\0';
+    numeros[n] = '\0';
 }
 
 int longitudCadena(const char* cadena) {
@@ -259,6 +327,25 @@ int contarReservados(char sala[FILAS][ASIENTOS_POR_FILA]) {
         }
     }
     return count;
+}
+
+int romanoAArabigo(const char* romano) {
+    int total = 0;
+    int i = 0;
+
+    while (romano[i] != '\0') {
+        int actual = valorRomano(romano[i]);
+        int siguiente = valorRomano(romano[i + 1]);
+
+        if (actual < siguiente) {
+            total = total - actual;
+        } else {
+            total = total + actual;
+        }
+        i++;
+    }
+
+    return total;
 }
 
 int contarEstrellas(int *matriz, int filas, int columnas){

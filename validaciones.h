@@ -19,5 +19,10 @@ int contarDisponibles(char sala[FILAS][ASIENTOS_POR_FILA]);
 int contarReservados(char sala[FILAS][ASIENTOS_POR_FILA]);
 bool cancelarReserva(char sala[FILAS][ASIENTOS_POR_FILA], char fila, int asiento);
 int contarEstrellas(int *matriz, int filas, int columnas);
+int cadenaAEntero(const char* cadena);
+void aMayusculas(char* cadena);
+void separarNumeros(const char* original, char* texto, char* numeros);
+int romanoAArabigo(const char* romano);
+
 
 #endif // VALIDACIONES_H
